@@ -1,8 +1,6 @@
 Stock-price-prediction-and-nlp-pipeline
 ==============================
 
-Aim is to create a workflow where we curate the data by web-scraping in Python. The model will be trained using the Long Short Term Memory(LSTM) model, to provide short term recommendations to buy or sell a stock of the company chosen by the user. The interface will include a dashboard with the stock trend for the company. We also aim to create an NLP pipeline for stock specific news that will also be web-scraped. A summarized version of the news will be reflected on the interface, and the associated sentiment with it. Goal is to curate all company specific information in one place so as to help the user make an informed decision regarding trading.
-
 #### Overview
 Prediction and analysis of the stock market are some of the most difficult tasks to execute. There are a multitude of reasons for this, including market volatility and a variety of other dependent and independent variables that influence the market value of a particular stock. Because of these factors, it is extremely difficult for any stock market expert to predict the market's rise and fall with great accuracy. 
 
