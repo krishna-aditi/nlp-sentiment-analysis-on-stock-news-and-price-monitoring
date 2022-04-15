@@ -1,6 +1,8 @@
 Stock-price-prediction-and-nlp-pipeline
 ==============================
 
+Proposal link (CLAAT): https://codelabs-preview.appspot.com/?file_id=1x528Ez7oU1SrBOJBMSHLpZ-h7VmKvegiq2tCO8b5fQw#1
+
 #### Overview
 Prediction and analysis of the stock market are some of the most difficult tasks to execute. There are a multitude of reasons for this, including market volatility and a variety of other dependent and independent variables that influence the market value of a particular stock. Because of these factors, it is extremely difficult for any stock market expert to predict the market's rise and fall with great accuracy. 
 
