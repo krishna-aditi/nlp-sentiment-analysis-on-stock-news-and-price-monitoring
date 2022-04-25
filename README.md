@@ -4,80 +4,53 @@ Stock-price-prediction-and-nlp-pipeline
 Proposal link (CLAAT): https://codelabs-preview.appspot.com/?file_id=1x528Ez7oU1SrBOJBMSHLpZ-h7VmKvegiq2tCO8b5fQw#1
 
 #### Overview
-Prediction and analysis of the stock market are some of the most difficult tasks to execute. There are a multitude of reasons for this, including market volatility and a variety of other dependent and independent variables that influence the market value of a particular stock. Because of these factors, it is extremely difficult for any stock market expert to predict the market's rise and fall with great accuracy. 
+Stock market analysis is a difficult task to execute because of market volatility and a multitude of  other dependent and independent factors that influence the market value of a particular stock. One of these factors - investor sentiment, is very much capable of influencing the stock price. News and social media are few of the ways to capture it. We aim to bring together natural language processing and sentiment analysis of the stock related news to better understand the stock price trends.
 
 #### Goals 
-Goal is to curate all company specific information in one place so as to help the user make an informed decision regarding trading
+Goal is to curate company specific news in a single interface, along with their stock trends with the help of a live dashboard. We focus on summarizing the news using NLP models, and labeling it as positive or negative using sentiment analysis. A dashboard with most recent data will also be present so as to help the user make an informed decision regarding trading.
 
-1. Aim is to create a workflow where we curate the data by web-scraping using YFinance library in Python. 
-2. The model will be trained using the Long Short Term Memory(LSTM) model, to provide short term recommendations to buy or sell a stock of the company chosen by the user.
-3. The interface will include a dashboard with the stock trend for the company. We also aim to create an NLP pipeline for company specific news that will also be web-scraped. 
-4. A summarized version of the news will be reflected on the interface, and the associated sentiment with it
+1. Create a workflow where we curate the data by web-scraping using YFinance library in Python
+2. The Streamlit interface will have an embedded dashboard for stock trends (high prices), built using Plotly. The page also includes stock specific quarterly financials and a description about the company
+3. Set up an Airflow DAG:
+    - Web-scrape stock news using NewsAPI
+    - Run AWS Lambda function for summarization 
+    - Run AWS Lambda function for sentiment analysis
+4. The final data will be cached in the GCP Cloud Storage Bucket for the user to trigger a "fetch" operation on the Streamlit application
 
 #### Use cases
-1. Recommendation: The system can recommend the stock to trade(buy or sell), so an investor can maximize the profit
-2. Predication: System will predict the price of the specific stock on a short term
-3. Outline: System will show the stock-related news summary which will help the investor to make informed decisions
-4. Single hub for stock news and company profile
+1. Single hub for stock trends and associated news to help the investor to make informed decisions
+2. Platform for learning about company stocks, or, stock  market analysis
 
 #### Data
 Following libraries will be potentially used to web-scrape data off Yahoo Finance:
 1. yfinance 
 2. BeautifulSoup (bs4)
-3. yahoofinancials
-
-#### Sample code
-```
-import requests 
-from bs4 import BeautifulSoup 
-import json
-
-mystocks = ['AAPL','TWTR'] 
-stockdata = []
-
-def getData( symbol):
-    headers= { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15'} 
-    url = f'https://finance.yahoo.com/quote/{symbol}' 
-    r = requests.get(url, headers=headers) 
-    soup = BeautifulSoup(r.text, 'html.parser') 
-    stock = {
-    'symbol': symbol, 
-    'price': soup.find('div', {'class':'D(ib) Mend(20px)'}).find_all('span')[0].text, 
-    'change': soup.find('div', {'class':'D(ib) Mend(20px)'}).find_all('span')[1]. text,
-    }
-    return stock
-
-for item in mystocks:
-    stockdata.append(getData(item)) 
-    print('Getting:', item)
-with open('stockdata.json', 'w') as f:
-    json. dump(stockdata, f)
-```
+3. news-api
 
 #### Process Outline
-- Developing an API for data scraping for stock information and profile, as well as stock news
-- Data preprocessing
-- Scheduling jobs to scrape data using Airflow
-- Using pre-trained ML model for price prediction
-- Dashboard creation
+- FastAPI for data scraping for stock prices
+- JWT Authentication for FastAPI
+- Data scraping for stock news
+- Dashboard creation using Google Data Studio
 - Building lambda functions for news summarization 
 - Building lambda functions for sentiment analysis
-- Deploying Lambda functions using AWS ECR
-- Developing UI using Streamlit, deploy on Streamlit Cloud
+- Deploying Serverless lambda 
+- Developing UI using Streamlit
+- Deploy on Streamlit Cloud
 
 #### Deployment Details:
 1. Language: Python
-2. Container: Docker, AWS ECR, AWS
+2. Container: Docker, AWS ECR
 3. Cloud ecosystems: AWS, Google cloud platform
-4. Cloud tools: AWS Lambda, AWS Cloudwatch, AWS Gateway, AWS Quicksight, AWS Sagemaker, AWS S3, AWS DynamoDB/Redshift, GCP cloud storage, Google BigQuery, Google App Engine, Google DataStudio
+4. Cloud tools: AWS Lambda, AWS Cloudwatch, AWS Gateway, GCP cloud storage, Google BigQuery, Google App Engine, Google DataStudio
 5. Tools for analysis: Google Colab, Anaconda Spyder, Microsoft Azure Visual Studio
 6. Other tools and frameworks: FastAPI, Pytest, Streamlit, Airflow
 
 #### High-level workflow
 
-![image](https://github.com/krishna-aditi/Stock-price-prediction-and-nlp-pipeline/blob/main/reports/figures/High-level%20workflow.png)
+![image]()
 
-Fig. Proposed high-level workflow
+Fig. Proposed  workflow
 
 #### References:
 1. https://python.plainenglish.io/build-a-stock-data-api-using-web-scraping-and-fastapi-dcbcdbd3d2ec
