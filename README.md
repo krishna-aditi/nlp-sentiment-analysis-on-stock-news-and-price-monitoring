@@ -74,6 +74,9 @@ Fig. Proposed  workflow
 2. https://zzhu17.medium.com/web-scraping-yahoo-finance-news-a18f9b20ee8a
 3. https://www.analyticsvidhya.com/blog/2021/06/download-financial-dataset-using-yahoo-finance-in-python-a-complete-guide/
 4. https://www.parsehub.com/blog/scrape-yahoo-finance/
+5. https://newspaper.readthedocs.io/en/latest/
+6. https://huggingface.co/blog/sentiment-analysis-python
+7. https://newsapi.org/docs/client-libraries/python
 
 Project Organization
 ------------
