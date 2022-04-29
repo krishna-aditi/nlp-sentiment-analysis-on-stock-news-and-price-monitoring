@@ -1,21 +1,37 @@
-Stock-price-prediction-and-nlp-pipeline
+NLP and Sentiment Analysis on Stock News and Price Monitoring
 ==============================
 
 Proposal link (CLAAT): https://codelabs-preview.appspot.com/?file_id=1x528Ez7oU1SrBOJBMSHLpZ-h7VmKvegiq2tCO8b5fQw#1
 
 #### Overview
-Stock market analysis is a difficult task to execute because of market volatility and a multitude of  other dependent and independent factors that influence the market value of a particular stock. One of these factors - investor sentiment, is very much capable of influencing the stock price. News and social media are few of the ways to capture it. We aim to bring together natural language processing and sentiment analysis of the stock related news to better understand the stock price trends.
+Stock market analysis is a difficult task to execute because of market volatility and a multitude of  other dependent and independent factors that influence the market value of a particular stock. One of these factors - investor sentiment, is very much capable of influencing the stock price. News and social media are few of the ways to capture it. We aim to bring together Natural Language Processing and Sentiment Analysis of the stock related news to better understand the stock price trends.
 
 #### Goals 
-Goal is to curate company specific news in a single interface, along with their stock trends with the help of a live dashboard. We focus on summarizing the news using NLP models, and labeling it as positive or negative using sentiment analysis. A dashboard with most recent data will also be present so as to help the user make an informed decision regarding trading.
+Goal is to create a platform with curated information about a company's profile, stock specific news (from 24 hours), and the stock price trend from the past year. We focus on summarizing the news using NLP models, and labeling it as positive or negative using sentiment analysis. The platform aims to help the user make informed trading decisions.
 
-1. Create a workflow where we curate the data by web-scraping using YFinance library in Python
-2. The Streamlit interface will have an embedded dashboard for stock trends (high prices), built using Plotly. The page also includes stock specific quarterly financials and a description about the company
-3. Set up an Airflow DAG:
-    - Web-scrape stock news using NewsAPI
-    - Run AWS Lambda function for summarization 
-    - Run AWS Lambda function for sentiment analysis
-4. The final data will be cached in the GCP Cloud Storage Bucket for the user to trigger a "fetch" operation on the Streamlit application
+1. Create a workflow to web-scrape company specific information using YFinance library in Python
+2. Build a Streamlit interface for the FastAPI to render stock price trends, company’s financials, and description of the business
+3. Create an Airflow DAG to do the following:
+4. Web-scrape company specific stock news with the help of NewsAPI and Newspaper3K API
+5. Call the Summarization API (Lambda function) for summarization on each news article’s content
+6. Call Sentiment Analysis API (Lambda function) for extracting the sentiment of each news article
+7. Summarized news, along with the associated sentiment will be rendered on the Streamlit
+
+#### Main Requirements
+To test pretrained models and train API requires 
+- Python 3.8
+- pandas
+- numpy
+- Streamlit
+- Python-jose
+- Passlib
+- Transformers 3.4
+- Torch
+- GCSFS
+- Plotly
+- Yfinance
+- NewsAPI
+- Newspaper3K
 
 #### Use cases
 1. Single hub for stock trends and associated news to help the investor to make informed decisions
@@ -26,6 +42,7 @@ Following libraries will be potentially used to web-scrape data off Yahoo Financ
 1. yfinance 
 2. BeautifulSoup (bs4)
 3. news-api
+4. newspaper3k
 
 #### Process Outline
 - FastAPI for data scraping for stock prices
@@ -42,13 +59,13 @@ Following libraries will be potentially used to web-scrape data off Yahoo Financ
 1. Language: Python
 2. Container: Docker, AWS ECR
 3. Cloud ecosystems: AWS, Google cloud platform
-4. Cloud tools: AWS Lambda, AWS Cloudwatch, AWS Gateway, GCP cloud storage, Google BigQuery, Google App Engine, Google DataStudio
+4. Cloud tools: AWS Lambda, AWS Cloudwatch, AWS Gateway, GCP Cloud Storage, Google BigQuery, Google App Engine, Google DataStudio
 5. Tools for analysis: Google Colab, Anaconda Spyder, Microsoft Azure Visual Studio
 6. Other tools and frameworks: FastAPI, Pytest, Streamlit, Airflow
 
 #### High-level workflow
 
-![image]()
+![image](https://github.com/krishna-aditi/nlp-sentiment-analysis-on-stock-news-and-price-monitoring/blob/main/reports/figures/Proposed_architecture.png)
 
 Fig. Proposed  workflow
 
