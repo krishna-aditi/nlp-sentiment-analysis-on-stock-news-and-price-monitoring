@@ -108,13 +108,23 @@ Project Organization
     │   ├── __init__.py    <- Makes src a Python module
     │   │
     │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
+    │   │   └── stock_main.py
+    |   │   ├── news_scrapper.py
+    |   │   ├── streamlit-app.py
+    |   │   ├── airflow_dag
+    |   │   │   └── news_airflow.py
+    │   │   ├── news_summary
+    |   |   │   ├── handler.py
+    |   |   │   ├── get_models.py
+    |   │   |   ├── dockerfile
+    |   |   │   ├── serverless.yaml
+    |   |   │   └── requirements.txt
+    |   |   |
     │   ├── features       <- Scripts to turn raw data into features for modeling
     │   │   └── build_features.py
     │   │
     │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
+    │   │                     predictions
     │   │
     │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
     │       └── visualize.py
@@ -125,3 +135,7 @@ Project Organization
 --------
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+
+#### Submitted by:
+
+![image](https://user-images.githubusercontent.com/37017771/153502035-dde7b1ec-5020-4505-954a-2e67528366e7.png)
