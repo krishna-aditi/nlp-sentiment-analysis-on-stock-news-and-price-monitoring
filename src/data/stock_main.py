@@ -9,7 +9,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel # Pydantic is used for data handling
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
-from typing import Optional, List
+from typing import Optional
 from jose import JWTError, jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
@@ -20,6 +20,9 @@ import os
 import tempfile
 import pandas as pd
 import gcsfs
+import pathlib
+abspath = pathlib.Path(__file__).parent.resolve()
+
 # User database
 users_db = {
     "aditikrishna": {
@@ -29,7 +32,7 @@ users_db = {
         "hashed_password": '$2b$12$A19ccgQBlxIDs8OsSyBQR.dSOFfOTY6WnyrA9GQDOs/oVDLaRMmf2',
         "disabled": False,
         "admin": False,
-        "limit": 3
+        "limit": 10
     },
     "admin": {
         "username": "admin",
@@ -65,7 +68,7 @@ users_db = {
         "hashed_password": '$2b$12$A19ccgQBlxIDs8OsSyBQR.dSOFfOTY6WnyrA9GQDOs/oVDLaRMmf2',
         "disabled": False,
         "admin": False,
-        "limit": 3
+        "limit": 5
     }
 }
 
@@ -202,7 +205,7 @@ def read_stock():
 
 def writeDataToCloud(company, news_list):
     project_name = 'big-data-final-project'
-    credentials = "big-data-final-project-347804-0935c4105776.json"
+    credentials = os.path.join(abspath,"big-data-final-project-347804-0935c4105776.json")
     FS = gcsfs.GCSFileSystem(project=project_name, token=credentials)
     try:
         temp = tempfile.NamedTemporaryFile(delete=False,mode='w',suffix='.txt') 
@@ -217,7 +220,7 @@ def writeDataToCloud(company, news_list):
         
 def readDataFromCloud(company):
     project_name = 'big-data-final-project'
-    credentials = "big-data-final-project-347804-0935c4105776.json"
+    credentials = os.path.join(abspath,"big-data-final-project-347804-0935c4105776.json")
     FS = gcsfs.GCSFileSystem(project=project_name, token=credentials)
     try:
         with FS.open(f'stock_news/{company}.txt', 'rb') as fp:
@@ -229,12 +232,17 @@ def readDataFromCloud(company):
         
 # Endpoint to fetch company specific news
 @app.post("/utils/getnews")
-def scrape_news(params: StockParams, current_user: User = Depends(get_current_active_user)):
-    
-    print(f'{params.company_name}')
+def scrape_news(params: StockParams, current_user: User = Depends(get_current_active_admin)):
     try:
-        headlines, news = getNews(params.company_name)
-        url = writeDataToCloud(params.company_name, news)
+        try:
+            url = getNews(params.company_name, writeCloud=True)
+        except Exception as e:
+            if 'rateLimited' in str(e):
+                url = getNews(params.company_name, writeCloud=True)
+            else:
+                raise Exception(e)
+#        print(news)
+#        url = writeDataToCloud(params.company_name, news)
         key = 'News'
         value = url
     except Exception as e:
@@ -246,8 +254,6 @@ def scrape_news(params: StockParams, current_user: User = Depends(get_current_ac
 # Endpoint to fetch company specific news
 @app.post("/stocks/news")
 def fetch_news(params: StockParams, current_user: User = Depends(get_current_active_user)):
-    
-    print(f'{params.company_name}')
     try:
         news = readDataFromCloud(params.company_name)
         key = 'News'
@@ -255,8 +261,8 @@ def fetch_news(params: StockParams, current_user: User = Depends(get_current_act
     except Exception as e:
         key = 'Error'
         value = f'Issue with fetching News: {e}'
-    
     return {key:value}
+
 # Endpoint for admin live dashboard
 @app.post("/stocks/dashboard") # authentication only for the admin
 def dashboardURL(current_user: User = Depends(get_current_active_admin)):
@@ -277,8 +283,8 @@ def stock_info_scrape(params: StockParams, current_user: User = Depends(get_curr
     """
     username = current_user.username
     company = params.company_name
-    credentials_path = 'big-data-final-project-347804-0935c4105776.json'
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
+    credentials = os.path.join(abspath,"big-data-final-project-347804-0935c4105776.json")
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials
     current_hits = 0
     today = datetime.now().strftime('%Y-%m-%d')
     # BigQuery table append
@@ -294,7 +300,7 @@ def stock_info_scrape(params: StockParams, current_user: User = Depends(get_curr
     if current_user.limit > current_hits or current_user.limit < 0:
         pass
     else:
-        return {"rate_limit_error": "Maximum tries reached!"}
+        return {"Error": "Rate Limiting Error. Maximum tries reached!"}
     
     # To embed Data Studio Dashboard for user logging
     api_name = 'StocksNLP'
@@ -374,3 +380,4 @@ def stock_info_scrape(params: StockParams, current_user: User = Depends(get_curr
     
     # return {key:value}
     return {key_price:value_price, key_fin:value_fin, key_info:value_info}
+
