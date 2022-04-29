@@ -1,0 +1,15 @@
+service: serverless-news-sentiment-docker
+
+provider:
+  name: aws # provider
+  region: us-east-1 # aws region
+  memorySize: 5120 # optional, in MB, default is 1024
+  timeout: 120 # optional, in seconds, default is 6
+
+functions:
+  stocknewssentiment:
+    image: 130538636764.dkr.ecr.us-east-1.amazonaws.com/news-sentiment:latest #ecr url
+    events:
+      - http:
+          path: sentiment # http path
+          method: post # http method
