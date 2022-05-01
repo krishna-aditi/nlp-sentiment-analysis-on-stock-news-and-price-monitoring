@@ -15,6 +15,7 @@ def serverless_pipeline():
     # initialize the model tokenizer
     tokenizer = AutoTokenizer.from_pretrained("./model")
     
+    # function to calculate the sentiment score of the input news
     def sentiment(news_text):
         sentimentanalyzer = pipeline("sentiment-analysis", model = model, tokenizer = tokenizer)
         news_sentiment_result = sentimentanalyzer(news_text)[0]
