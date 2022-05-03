@@ -105,13 +105,8 @@ def basicScrapper(url):
 def getNews(company, writeCloud=False, proxies=''):
     
     
-    # Generate an API key from https://newsapi.org/register
-    apikey1= '260b8ecc8b4a485c94d7851d671c337b'
-    apikey2= 'acf1a6fb9c03484d8d0ff50db7e29da5'
-    apikey3 = '6c0efa820d8e4435bcaa2c74cd304741'
-    apikey4 = '95ac58e2c4724a6393a1eee319420128'
-    apikey5 = '1fb7eb97ad3e4784a20577e74d320ff3'
-    
+    # Generate 5 API keys from https://newsapi.org/register
+   
     keys = [apikey1,apikey2,apikey3,apikey4,apikey5]
     for i in range(len(keys)):
         try:
