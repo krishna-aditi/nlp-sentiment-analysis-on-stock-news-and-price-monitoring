@@ -3,6 +3,14 @@ NLP and Sentiment Analysis on Stock News and Price Monitoring
 
 Proposal link (CLAAT): https://codelabs-preview.appspot.com/?file_id=1x528Ez7oU1SrBOJBMSHLpZ-h7VmKvegiq2tCO8b5fQw#1
 
+FastAPI link (hosted on App Engine): https://big-data-final-project-347804.ue.r.appspot.com
+
+Streamlit Cloud link: https://share.streamlit.io/krishna-aditi/nlp-sentiment-analysis-on-stock-news-and-price-monitoring/main/src/data/streamlit-app.py
+
+Documentation link (Google Doc): https://docs.google.com/document/d/1AbperRxJHq3DNUMaQ18v6EQXjUE_nIiD1WQ-OZDkRds/edit?usp=sharing
+
+Documentation CLAAT link: 
+
 #### Overview
 Stock market analysis is a difficult task to execute because of market volatility and a multitude of  other dependent and independent factors that influence the market value of a particular stock. One of these factors - investor sentiment, is very much capable of influencing the stock price. News and social media are few of the ways to capture it. We aim to bring together Natural Language Processing and Sentiment Analysis of the stock related news to better understand the stock price trends.
 
