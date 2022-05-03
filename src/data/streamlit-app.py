@@ -100,26 +100,27 @@ def main():
             
             if (username and password) or s.authenticated:
                 s.authenticated = True
-                token = requests.post("http://127.0.0.1:8000/token", data = authjson)
+                token = requests.post("https://big-data-final-project-347804.ue.r.appspot.com/token", data = authjson)
                 if col2.button("Log Out"):
                     s.authenticated = False
                     token = None
                     s.token = ''
                     s.company = ''
-                    st.markdown(f"Log Out Successful!")
+                    st.success(f"Log Out Successful!")
                     return None
                                 
                 if token.status_code == 200: 
                      s.authenticated = True
                      s.token = token.json()['access_token']
-                     st.markdown(f"Login Successful! You now have access to explore other pages!")
-                
+                     st.success(f"Login Successful! You now have access to explore other pages!")  
+                else:
+                    st.error('Please Enter Valid Username and Password!')
             else:
-                st.markdown('Please Enter Valid Username and Password')
+                st.error('Please Enter Valid Username and Password!')
                     
     if page == "About the company":
         if not s.authenticated:
-            st.markdown(f"Please Login to Access this Page.")
+            st.error(f"Please Login to Access this Page.")
         else:
             st.subheader("Choose company:")
             comp_name = st.selectbox("",("AAPL-Apple", "MSFT-Microsoft", "AMZN-Amazon", "WMT-Walmart", "GOOG-Alphabet", "FB-Meta", "TSLA-Tesla", "NVDA-NVIDIA", "PFE-Pfizer", "NFLX-Netflix"))
@@ -129,12 +130,12 @@ def main():
             if st.button("Fetch"):
                 s.company = comp_name.split('-')[-1].strip()
                 headers = {"Authorization": f"Bearer {s.token}"}
-                info_test = requests.post("http://127.0.0.1:8000/stocks/stock_info", headers=headers, json = params_test)   
+                info_test = requests.post("https://big-data-final-project-347804.ue.r.appspot.com/stocks/stock_info", headers=headers, json = params_test)   
                 if info_test.status_code == 200:
                     output = info_test.json()
                     # Lineplot for High column
                     if 'Error' in output.keys():
-                        st.markdown(f"{output['Error']}")
+                        st.error(f"{output['Error']}")
                     else:
                         st.markdown("")
                         comp_summary(output['Info'], comp_name)
@@ -144,26 +145,26 @@ def main():
                         comp_fin(output['Finance'], comp_name)
                         st.markdown("")
                 else:
-                    st.markdown(f"Server Error: {info_test.json()['detail']}")
+                    st.error(f"Server Error: {info_test.json()['detail']}")
     
     # Reads company news stored in bucket already
     if page == "Company news":
         headers = {"Authorization": f"Bearer {s.token}"}
         if s.company != '':
             params_test = {"company_name": s.company}
-            response = requests.post("http://127.0.0.1:8000/stocks/news", headers=headers, json = params_test)
+            response = requests.post("https://big-data-final-project-347804.ue.r.appspot.com/stocks/news", headers=headers, json = params_test)
             if response.status_code == 200:
                 output = response.json()
                 # Lineplot for High column
                 if 'Error' in output.keys():
-                    st.markdown(f"{output['Error']}")
+                    st.error(f"{output['Error']}")
                 else:
                     comp_news(output['News'], s.company)
             else:
-                st.markdown(f"Server Error: {response.json()['detail']}")
+                st.error(f"Server Error: {response.json()['detail']}")
                     
         else:
-            st.markdown("Please Select a Company and Fetch details in 'About Company' Page!!") 
+            st.error("Please Select a Company and Fetch details in 'About Company' Page!!") 
     
     # Dashboard
     if page == "API Live Dashboard":
@@ -175,14 +176,14 @@ def main():
         st.markdown("")
         st.markdown(html_temp_airflow, unsafe_allow_html=True)
         headers = {"Authorization": f"Bearer {s.token}"}
-        response = requests.post("http://127.0.0.1:8000/stocks/dashboard", headers=headers)
+        response = requests.post("https://big-data-final-project-347804.ue.r.appspot.com/stocks/dashboard", headers=headers)
         if response.status_code == 200:
             url = response.json()['url']
             st.markdown(f"""
                         <iframe width="700" height="550" src={url} frameborder="0" style="border:0" allowfullscreen></iframe>
                         """, unsafe_allow_html=True)
         else:
-            st.markdown(f"Not an ADMIN! Stocks API Dashboard is only for ADMIN users.")
+            st.error(f"Not an ADMIN! Stocks API Dashboard is only for ADMIN users.")
     
     # Generate news on-demand       
     if page == "On-demand News Fetch for Admin":
@@ -199,7 +200,7 @@ def main():
         comp = comp_name.split("-")[-1].strip()
         params_test = {"company_name": comp}
         if st.button("Generate News"):
-            response = requests.post("http://127.0.0.1:8000/utils/getnews", headers=headers, json = params_test)
+            response = requests.post("https://big-data-final-project-347804.ue.r.appspot.com/utils/getnews", headers=headers, json = params_test)
             if response.status_code == 200:
                 if 'News' not in response.json().keys():
                     st.markdown(response.json())
@@ -209,7 +210,7 @@ def main():
                                 {url}
                                 """, unsafe_allow_html=True)
             else:
-                st.markdown(f"Not an ADMIN! Triggering Stock News Scrapping is only for ADMIN users.")
+                st.error(f"Not an ADMIN! Triggering Stock News Scrapping is only for ADMIN users.")
         
 if __name__ == "__main__":
     main()
