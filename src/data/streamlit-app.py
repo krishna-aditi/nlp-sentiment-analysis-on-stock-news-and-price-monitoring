@@ -5,7 +5,7 @@ Created on Tue Apr 19 22:31:39 2022
 @author: krish
 """
 import streamlit as st
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import plotly.express as px
 import yfinance as yf
 import requests
