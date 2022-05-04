@@ -7,6 +7,10 @@ FastAPI link (hosted on App Engine): https://big-data-final-project-347804.ue.r.
 
 Streamlit Cloud link: https://share.streamlit.io/krishna-aditi/nlp-sentiment-analysis-on-stock-news-and-price-monitoring/main/src/data/streamlit-app.py
 
+Summarization serverless lambda function endpoint link: https://j3btan6btg.execute-api.us-east-1.amazonaws.com/dev/summary
+
+Sentiment Analysis serverless lambda function endpoint link: https://n9h06pjw6f.execute-api.us-east-1.amazonaws.com/dev/sentiment
+
 Documentation link (Google Doc): https://docs.google.com/document/d/1AbperRxJHq3DNUMaQ18v6EQXjUE_nIiD1WQ-OZDkRds/edit?usp=sharing
 
 Documentation CLAAT link: 
