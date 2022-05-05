@@ -1,0 +1,14 @@
+1. Create Model directory for storing a model.
+	>> mkdir model
+2. Run a get_model file to download a model on local system. As model need to be there on docker image.
+	>> python get_model.py
+3. Once model is downloaded, we can create a docker image.
+	>> docker build -t sentiment-distalbert .
+4. As docker image is created, we can test the same on local system before deploying to any repository or docker hub
+>> docker -run 8080:8080 sentiment-distalbert
+
+5. Testing on Local :
+	Open a new terminal to test the functionality.
+	>>  curl --request POST --url http://localhost:8080/2015-03-31/functions/function/	invocations --header 'Content-Type: application/json' --data '{"body”:”I”’m good}’
+
+*In the command, body is passed as a input to a model.
