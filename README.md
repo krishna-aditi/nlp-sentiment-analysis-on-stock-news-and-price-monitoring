@@ -126,9 +126,16 @@ Project Organization
     │   │   └── stock_main.py
     |   │   ├── news_scrapper.py
     |   │   ├── streamlit-app.py
+    |   │   ├── test.py    
     |   │   ├── airflow_dag
     |   │   │   └── news_airflow.py
     │   │   ├── news_summary
+    |   |   │   ├── handler.py
+    |   |   │   ├── get_models.py
+    |   │   |   ├── dockerfile
+    |   |   │   ├── serverless.yaml
+    |   |   │   └── requirements.txt
+    │   │   ├── news_sentiment
     |   |   │   ├── handler.py
     |   |   │   ├── get_models.py
     |   │   |   ├── dockerfile
