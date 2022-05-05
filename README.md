@@ -13,7 +13,7 @@ Sentiment Analysis serverless lambda function endpoint link: https://n9h06pjw6f.
 
 Documentation link (Google Doc): https://docs.google.com/document/d/1AbperRxJHq3DNUMaQ18v6EQXjUE_nIiD1WQ-OZDkRds/edit?usp=sharing
 
-Documentation CLAAT link: 
+Documentation CLAAT link: https://codelabs-preview.appspot.com/?file_id=1AbperRxJHq3DNUMaQ18v6EQXjUE_nIiD1WQ-OZDkRds#0
 
 #### Overview
 Stock market analysis is a difficult task to execute because of market volatility and a multitude of  other dependent and independent factors that influence the market value of a particular stock. One of these factors - investor sentiment, is very much capable of influencing the stock price. News and social media are few of the ways to capture it. We aim to bring together Natural Language Processing and Sentiment Analysis of the stock related news to better understand the stock price trends.
