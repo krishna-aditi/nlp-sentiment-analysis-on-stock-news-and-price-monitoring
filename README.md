@@ -1,22 +1,23 @@
 NLP and Sentiment Analysis on Stock News and Price Monitoring
 ==============================
 
-Proposal link (CLAAT): https://codelabs-preview.appspot.com/?file_id=1x528Ez7oU1SrBOJBMSHLpZ-h7VmKvegiq2tCO8b5fQw#1
+- Proposal link (CLAAT): https://codelabs-preview.appspot.com/?file_id=1x528Ez7oU1SrBOJBMSHLpZ-h7VmKvegiq2tCO8b5fQw#1
 
-FastAPI link (hosted on App Engine): https://big-data-final-project-347804.ue.r.appspot.com
+- FastAPI link (hosted on App Engine): https://big-data-final-project-347804.ue.r.appspot.com
 
-Streamlit Cloud link: https://share.streamlit.io/krishna-aditi/nlp-sentiment-analysis-on-stock-news-and-price-monitoring/main/src/data/streamlit-app.py
-- For demo purpose
-    -  UserID: admin 
-    -  Pwd: admin
+- Streamlit Cloud link: https://share.streamlit.io/krishna-aditi/nlp-sentiment-analysis-on-stock-news-and-price-monitoring/main/src/data/streamlit-app.py
+    - To run the project, click on the above Streamlit link and login with the following credentials
+        -  UserID: admin 
+        -  Pwd: admin
+    - The funtionality to fetch news on-demand takes one or two clicks, since the lambda functions take some time to start and might end up in a timeout error on first attempt. 
+- Summarization serverless lambda function endpoint link: https://j3btan6btg.execute-api.us-east-1.amazonaws.com/dev/summary
 
-Summarization serverless lambda function endpoint link: https://j3btan6btg.execute-api.us-east-1.amazonaws.com/dev/summary
+- Sentiment Analysis serverless lambda function endpoint link: https://n9h06pjw6f.execute-api.us-east-1.amazonaws.com/dev/sentiment
 
-Sentiment Analysis serverless lambda function endpoint link: https://n9h06pjw6f.execute-api.us-east-1.amazonaws.com/dev/sentiment
+- Documentation link (Google Doc): https://docs.google.com/document/d/1AbperRxJHq3DNUMaQ18v6EQXjUE_nIiD1WQ-OZDkRds/edit?usp=sharing
 
-Documentation link (Google Doc): https://docs.google.com/document/d/1AbperRxJHq3DNUMaQ18v6EQXjUE_nIiD1WQ-OZDkRds/edit?usp=sharing
-
-Documentation CLAAT link: https://codelabs-preview.appspot.com/?file_id=1AbperRxJHq3DNUMaQ18v6EQXjUE_nIiD1WQ-OZDkRds#0
+- Documentation CLAAT link: https://codelabs-preview.appspot.com/?file_id=1AbperRxJHq3DNUMaQ18v6EQXjUE_nIiD1WQ-OZDkRds#0
+    - The functional documentation in detail can be found on the above CLAAT Link
 
 #### Overview
 Stock market analysis is a difficult task to execute because of market volatility and a multitude of  other dependent and independent factors that influence the market value of a particular stock. One of these factors - investor sentiment, is very much capable of influencing the stock price. News and social media are few of the ways to capture it. We aim to bring together Natural Language Processing and Sentiment Analysis of the stock related news to better understand the stock price trends.
@@ -78,11 +79,12 @@ Following libraries will be potentially used to web-scrape data off Yahoo Financ
 5. Tools for analysis: Google Colab, Anaconda Spyder, Microsoft Azure Visual Studio
 6. Other tools and frameworks: FastAPI, Pytest, Streamlit, Airflow
 
-#### High-level workflow
+#### Workflow
 
 ![image](https://github.com/krishna-aditi/nlp-sentiment-analysis-on-stock-news-and-price-monitoring/blob/main/reports/figures/Proposed_architecture.png)
 
 Fig. Proposed  workflow
+
 
 #### References:
 1. https://python.plainenglish.io/build-a-stock-data-api-using-web-scraping-and-fastapi-dcbcdbd3d2ec
@@ -92,6 +94,14 @@ Fig. Proposed  workflow
 5. https://newspaper.readthedocs.io/en/latest/
 6. https://huggingface.co/blog/sentiment-analysis-python
 7. https://newsapi.org/docs/client-libraries/python
+8. https://fastapi.tiangolo.com/tutorial/first-steps/
+9. https://www.youtube.com/watch?v=1zMQBe0l1bM&ab_channel=AbhishekThakur
+10. https://docs.streamlit.io/streamlit-cloud/get-started/deploy-an-app
+11. https://www.philschmid.de/serverless-bert-with-huggingface-aws-lambda-docker
+12. https://pypi.org/project/yfinance/
+13. https://www.thepythoncode.com/article/text-summarization-using-huggingface-transformers-python
+14. https://huggingface.co/blog/sentiment-analysis-python
+15. https://newspaper.readthedocs.io/en/latest/
 
 Project Organization
 ------------
