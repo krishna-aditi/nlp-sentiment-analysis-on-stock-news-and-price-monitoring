@@ -12,7 +12,7 @@ import requests
 
 # Plotly plot for high price
 def price_plot(data_frame, comp):
-    fig = px.line(data_frame, x="Date", y="High", labels={"Date": "Date",  "High": "High Price of Stock"}, width=750, height=500, template="plotly_dark")
+    fig = px.line(data_frame, x="Date", y="Close", labels={"Date": "Date",  "Close": "Close Price of Stock"}, width=750, height=500, template="plotly_dark")
     html_temp = f"""
         <div style="background-color:#154360;padding:2px">
         <h2 style="color:White;text-align:center;">Stock price monitor for {comp}</h2>
