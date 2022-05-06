@@ -6,6 +6,9 @@ Proposal link (CLAAT): https://codelabs-preview.appspot.com/?file_id=1x528Ez7oU1
 FastAPI link (hosted on App Engine): https://big-data-final-project-347804.ue.r.appspot.com
 
 Streamlit Cloud link: https://share.streamlit.io/krishna-aditi/nlp-sentiment-analysis-on-stock-news-and-price-monitoring/main/src/data/streamlit-app.py
+- For demo purpose
+    -  UserID: admin 
+    -  Pwd: admin
 
 Summarization serverless lambda function endpoint link: https://j3btan6btg.execute-api.us-east-1.amazonaws.com/dev/summary
 
